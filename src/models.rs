@@ -14,6 +14,15 @@ pub struct Node {
     pub updated_at: SystemTime, // to compare if the new fetch is newer
 }
 
+// generated because of PgNumeric
+impl serde::Serialize for Node {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer {
+        todo!()
+    }
+}
+
 #[derive(Insertable)]
 #[diesel(table_name = nodes)]
 pub struct AddNode<'a> {

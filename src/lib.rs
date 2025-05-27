@@ -1,11 +1,10 @@
 pub mod models;
 pub mod schema;
 
-use diesel::{data_types::PgNumeric, dsl::now, prelude::*};
+use axum::http::StatusCode;
+use diesel::prelude::*;
 use dotenvy::{self, dotenv};
 use std::env;
-use std::time::SystemTime;
-
 
 pub fn establish_connection() -> PgConnection{
     dotenv().ok();
@@ -15,16 +14,9 @@ pub fn establish_connection() -> PgConnection{
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-// use self::models::{AddNode, Node};
-
-// fn add_node(conn: &mut PgConnection, pub_key: &str, alias: &str, cap: &PgNumeric, first_seen: &SystemTime) -> Node{
-//     use crate::schema::nodes;
-
-//     let nodes = AddNode {public_key: pub_key, alias: alias, capacity: cap, first_seen: first_seen, updated_at: &SystemTime::now()};
-
-//     diesel::insert_into(nodes::table)
-//         .values(nodes)
-//         .returning(Node::as_returning())
-//         .get_result(conn)
-//         .expect("error while adding a new node")
-// }
+pub fn internal_error<E>(err: E) -> (StatusCode, String)
+where
+    E: std::error::Error,
+{
+    (StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
+}
