@@ -16,7 +16,7 @@ My goal was to implement the solution while learning and understanding the struc
 - Iterating on the JSON structure ([reference](https://ectobit.com/blog/parsing-json-in-rust/))
 
 ## How long did you spend on this project?
-I spent **4 days**: 1 day studying the stack and 3 days creating demos and building the solution. My learning repo, which includes references and demos, can be found here:
+I spent **4 days**: 1 day studying the stack and 3 days creating demos and building the solution. My learning repo, which includes study materials and demos, can be found here:
 - [rust_studies](https://github.com/PedroCo3lho/rust_studies/tree/main)
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
