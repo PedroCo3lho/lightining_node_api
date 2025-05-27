@@ -1,20 +1,27 @@
-use lightining_node_api::*;
 use self::models::{AddNode, Node};
+use axum::{
+    extract::State,
+    http::StatusCode,
+    response::Json
+};
+use lightining_node_api::*;
 
-use std::time::SystemTime;
-use diesel::prelude::*;
 use diesel::data_types::PgNumeric;
+use diesel::prelude::*;
+use std::time::SystemTime;
 
 // add a single node
-fn add_node(
-    conn: &mut PgConnection,
-    pub_key: &str,
-    alias: &str,
-    cap: &PgNumeric,
-    first_seen: &SystemTime,
-    updated_at: &SystemTime,
-) -> Node {
+async fn add_node(
+    State(pool): State<deadpool_diesel::postgres::Pool>,
+    pub_key: String,
+    alias: String,
+    cap: PgNumeric,
+    first_seen: SystemTime,
+    updated_at: SystemTime,
+) -> Result<Json<Node>, (StatusCode, String)> {
     use crate::schema::nodes;
+
+    let conn = pool.get().await.map_err(internal_error)?;
 
     let nodes = AddNode {
         public_key: pub_key,
@@ -24,9 +31,15 @@ fn add_node(
         updated_at: updated_at,
     };
 
-    diesel::insert_into(nodes::table)
-        .values(nodes)
-        .returning(Node::as_returning())
-        .get_result(conn)
-        .expect("error while adding a new node")
+    let res = conn
+        .interact(|conn| {
+            diesel::insert_into(nodes::table)
+                .values(nodes)
+                .returning(Node::as_returning())
+                .get_result(conn)
+        })
+        .await
+        .map_err(internal_error)?
+        .map_err(internal_error)?;
+    Ok(Json(res))
 }
