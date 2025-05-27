@@ -16,11 +16,17 @@ My goal was to implement the solution while learning and understanding the struc
 - Iterating on the JSON structure ([reference](https://ectobit.com/blog/parsing-json-in-rust/))
 
 ## How long did you spend on this project?
-I spent **4 days**: 1 day studying the stack and 3 days creating demos and building the solution. My learning repo, which includes study materials and demos, can be found here:
+I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day creating demos and the 3rd and 4º building the solution. My learning repo, which includes the study materials I used and demos, can be found here:
 - [rust_studies](https://github.com/PedroCo3lho/rust_studies/tree/main)
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
-I chose to use Supabase PostgresSQL to avoid additional local database setup. 
+I chose to use Supabase PostgreSQL to avoid additional local database setup. 
+With more time I would:
+- Type more the code;
+- Handle better the possible errors;
+- Containerize the solution; 
+- Implement better concurrency with async;
+- Create tests to measure the performance, errors and security;
 
 ## What do you think is the weakest part of your project?
 
