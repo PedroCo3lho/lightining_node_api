@@ -7,7 +7,7 @@ use serde_json::Value;
 use std::sync::Arc;
 use std::time::{Duration, UNIX_EPOCH};
 
-async fn fetch_nodes() -> Vec<Node> {
+pub async fn fetch_nodes() -> Vec<Node> {
     let client = Arc::new(reqwest::Client::new()); 
     let request_url = "https://mempool.space/api/v1/lightning/nodes/rankings/connectivity";
 
