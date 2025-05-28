@@ -6,9 +6,33 @@ API JSON built in Rust that periodically consults the Mempool lightning node sta
 - Diesel 
 - PostgresSql (Supabase)
 
-I chose the stack inpired by [Guilherme Salustiano's talk](https://youtu.be/v0axYVJX_hI), that showcases the Diesel Internals. 
+I chose the stack inspired by [Guilherme Salustiano's talk](https://youtu.be/v0axYVJX_hI), that showcases the Diesel Internals. 
 
 ## Steps to run the app
+
+1. Rename the .env file and configure your Database URL
+
+```bash
+mv .env.example/ .env
+```
+
+2. Setup the project through the Diesel CLI 
+
+```bash
+diesel setup
+```
+
+3. Run the migrations
+
+```bash
+diesel migration run 
+```
+
+4. Run the project
+
+```bash
+cargo run 
+```
 
 ## What was the reason for your focus? What problems were you trying to solve?
 My goal was to implement the solution while learning and understanding the structure of a back-end built with this new stack. The main challenges I faced during development were:
@@ -21,7 +45,7 @@ I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day cre
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
 - I chose to use Supabase PostgreSQL to avoid additional local database setup. 
-- Droped Numeric type from capacity, due to erros working with the structure and PgNumeric
+- Drop from Numeric type to Float in the capacity column, due to errors working with the `struct` and `PgNumeric`
 
 With more time I would:
 - Type more the code;
