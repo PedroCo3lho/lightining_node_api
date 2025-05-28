@@ -18,7 +18,7 @@ pub async fn fetch_nodes() -> Vec<Node> {
     process_nodes(&response)
 }
 
-// Iteration of each value e data processing/converting 
+// Iteration of each value e data processing/converting
 fn process_nodes(data: &Value) -> Vec<Node> {
     let mut processed_nodes: Vec<Node> = vec![];
     if let Value::Array(nodes_array) = data {
@@ -47,9 +47,11 @@ fn process_nodes(data: &Value) -> Vec<Node> {
 
                 let btc_capacity: f64 = sats_capaciticy as f64 / 100_000_000.0;
                 let dt_first_seen =
-                    DateTime::<Utc>::from(UNIX_EPOCH + Duration::from_secs(unix_first_seen)).naive_utc();
+                    DateTime::<Utc>::from(UNIX_EPOCH + Duration::from_secs(unix_first_seen))
+                        .naive_utc();
                 let dt_updated_at =
-                    DateTime::<Utc>::from(UNIX_EPOCH + Duration::from_secs(unix_update_at)).naive_utc();
+                    DateTime::<Utc>::from(UNIX_EPOCH + Duration::from_secs(unix_update_at))
+                        .naive_utc();
 
                 processed_nodes.push(Node {
                     public_key: (pub_key),

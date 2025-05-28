@@ -1,6 +1,6 @@
 use crate::schema::nodes;
-use diesel::prelude::*;
 use chrono::NaiveDateTime;
+use diesel::prelude::*;
 
 #[derive(Debug, serde::Serialize, Queryable, Selectable)]
 #[diesel(table_name = crate::schema::nodes)]
