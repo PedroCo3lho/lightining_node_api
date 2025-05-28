@@ -35,9 +35,11 @@ cargo run
 ```
 
 ## What was the reason for your focus? What problems were you trying to solve?
-My goal was to implement the solution while learning and understanding the structure of a back-end built with this new stack. The main challenges I faced during development were:
+My goal was to implement the solution while learning and understanding the structure of a back-end built with this new stack. 
+Some challenges I faced during development were:
 - Researching the stack and figuring out how to integrate all components
-- Iterating on the JSON structure ([reference](https://ectobit.com/blog/parsing-json-in-rust/))
+- Learn how to iterate on the JSON structure ([reference](https://ectobit.com/blog/parsing-json-in-rust/))
+- Type `PgNumeric` and `DateTime` in the the table struct, it was conflicting when applying `serde` macros
 
 ## How long did you spend on this project?
 I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day creating demos and the 3rd and 4º building the solution. My learning repo, which includes the study materials I used and demos, can be found here:
@@ -51,7 +53,7 @@ With more time I would:
 - Type more the code;
 - Handle better the possible errors;
 - Containerize the solution; 
-- Implement better concurrency with async;
+- Implement better concurrency with diesel_async;
 - Create tests to measure the performance, errors and security;
 
 ## What do you think is the weakest part of your project?
