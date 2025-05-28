@@ -6,4 +6,4 @@ file = "src/schema.rs"
 custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
 
 [migrations_directory]
-dir = "/home/pedro/tests/bipa/Back-end-Coding-Challenge/migrations"
+dir = "/home/pedro/tests/bipa/lightining_node_api/migrations"

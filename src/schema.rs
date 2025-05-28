@@ -6,7 +6,7 @@ diesel::table! {
         #[max_length = 66]
         public_key -> Varchar,
         alias -> Text,
-        capacity -> Numeric,
+        capacity -> Float8,
         first_seen -> Timestamp,
         updated_at -> Timestamp,
     }

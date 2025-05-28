@@ -1,23 +1,17 @@
 use self::models::{AddNode, Node};
-use axum::{
-    extract::State,
-    http::StatusCode,
-    response::Json
-};
-use lightining_node_api::*;
-
-use diesel::data_types::PgNumeric;
+use axum::{extract::State, http::StatusCode, response::Json};
+use chrono::NaiveDateTime;
 use diesel::prelude::*;
-use std::time::SystemTime;
+use lightining_node_api::*;
 
 // add a single node
 async fn add_node(
     State(pool): State<deadpool_diesel::postgres::Pool>,
     pub_key: String,
     alias: String,
-    cap: PgNumeric,
-    first_seen: SystemTime,
-    updated_at: SystemTime,
+    cap: f64,
+    first_seen: NaiveDateTime,
+    updated_at: NaiveDateTime,
 ) -> Result<Json<Node>, (StatusCode, String)> {
     use crate::schema::nodes;
 

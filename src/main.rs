@@ -1,16 +1,14 @@
-mod queries;
 mod etl;
+mod queries;
 
 use axum::{Router, routing::get};
-use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
+use diesel_async::{AsyncPgConnection, pooled_connection::AsyncDieselConnectionManager};
+use diesel_migrations::{EmbeddedMigrations, MigrationHarness, embed_migrations};
 use dotenvy::dotenv;
 use etl::fetch_api::fetch_nodes;
 use lightining_node_api::*;
 use queries::get_nodes::get_nodes;
 use std::{env, net::SocketAddr};
-use diesel_async::{
-    pooled_connection::AsyncDieselConnectionManager, AsyncPgConnection
-};
 
 pub type Pool = bb8::Pool<AsyncDieselConnectionManager<AsyncPgConnection>>;
 
@@ -35,11 +33,11 @@ async fn main() {
             .unwrap()
             .unwrap();
     }
-    
+
     let fnodes = fetch_nodes().await;
 
-    println!("{:?}", fnodes );
-    
+    println!("{:?}", fnodes);
+
     // build our application with some routes
     let app = Router::new()
         .route("/nodes", get(get_nodes))

@@ -20,7 +20,9 @@ I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day cre
 - [rust_studies](https://github.com/PedroCo3lho/rust_studies/tree/main)
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
-I chose to use Supabase PostgreSQL to avoid additional local database setup. 
+- I chose to use Supabase PostgreSQL to avoid additional local database setup. 
+- Droped Numeric type from capacity, due to erros working with the structure and PgNumeric
+
 With more time I would:
 - Type more the code;
 - Handle better the possible errors;
