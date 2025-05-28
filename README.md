@@ -1,10 +1,14 @@
 # Back-end-Coding-Challenge
-API JSON built in Rust that periodically consults the Mempool lightning node state, process the data, and stores in a PostgresSQL database. The API features a GET method to retrieve the node's data.
+API JSON built in Rust that periodically consults the Mempool lightning node state, process the data, and stores in a PostgresSQL database. The API features a GET method to retrieve the node's data from the database.
 
 ## Build tools & versions used
-- Axum 
-- Diesel 
-- PostgresSql (Supabase)
+- PostgreSql (Supabase)
+- axum = "0.8.4"
+- tokio = "1.45.1"
+- diesel = "2.2.0"
+- chrono = "0.4.41"
+- serde = "1.0.219"
+- dotenvy = "0.15"
 
 I chose the stack inspired by [Guilherme Salustiano's talk](https://youtu.be/v0axYVJX_hI), that showcases the Diesel Internals. 
 
@@ -42,7 +46,9 @@ Some challenges I faced during development were:
 - Type `PgNumeric` and `DateTime` in the the table struct, it was conflicting when applying `serde` macros
 
 ## How long did you spend on this project?
-I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day creating demos and the 3rd and 4º building the solution. My learning repo, which includes the study materials I used and demos, can be found here:
+I spent **4 days**: the 1st day studying and choosing the stack; the 2nd day creating demos and the 3rd and 4º building the solution. 
+
+My learning repo, which includes the study materials I used and demos, can be found here:
 - [rust_studies](https://github.com/PedroCo3lho/rust_studies/tree/main)
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
@@ -53,10 +59,12 @@ With more time I would:
 - Type more the code;
 - Handle better the possible errors;
 - Containerize the solution; 
-- Implement better concurrency with diesel_async;
+- Implement better concurrency with diesel_async and tokio::join;
 - Create tests to measure the performance, errors and security;
+- Add a telemetry feature for application monitoring.
 
 ## What do you think is the weakest part of your project?
+The concurrency part 
 
 ## Is there any other information you’d like us to know?
 
