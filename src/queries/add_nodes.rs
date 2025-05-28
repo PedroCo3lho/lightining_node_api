@@ -5,7 +5,7 @@ use diesel::prelude::*;
 use lightining_node_api::*;
 
 // add a single node
-async fn add_node(
+pub async fn add_node(
     State(pool): State<deadpool_diesel::postgres::Pool>,
     pub_key: String,
     alias: String,

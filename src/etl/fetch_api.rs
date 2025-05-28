@@ -18,8 +18,8 @@ pub async fn fetch_nodes() -> Vec<Node> {
     process_nodes(&response)
 }
 
+// Iteration of each value e data processing/converting 
 fn process_nodes(data: &Value) -> Vec<Node> {
-    // I'll need to type the response to interate with each one to convert values and select values
     let mut processed_nodes: Vec<Node> = vec![];
     if let Value::Array(nodes_array) = data {
         for node in nodes_array {
