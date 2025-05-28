@@ -40,9 +40,10 @@ async fn main() {
             .unwrap();
     }
 
+    // Initial seeder 
     seeder(&pool).await;
 
-    // Routine tha update nodes data
+    // Routine that update nodes data
     tokio::spawn({
         let pool = pool.clone();
         async move {
@@ -51,11 +52,11 @@ async fn main() {
             loop {
                 interval.tick().await;
                 let _ = update_node(state.clone()).await;
+                // It's good to add a routine tha daily refresh the database and re-populate it
             }
         }
     });
 
-    // build our application with some routes
     let app = Router::new()
         .route("/nodes", get(get_nodes))
         .with_state(pool);

@@ -6,6 +6,7 @@ use serde_json::Value;
 use std::sync::Arc;
 use std::time::{Duration, UNIX_EPOCH};
 
+// extract and transform data from mempool
 pub async fn fetch_nodes() -> Vec<Node> {
     let client = Arc::new(reqwest::Client::new());
     let request_url = "https://mempool.space/api/v1/lightning/nodes/rankings/connectivity";
@@ -18,7 +19,7 @@ pub async fn fetch_nodes() -> Vec<Node> {
     process_nodes(&response)
 }
 
-// Iteration of each value e data processing/converting
+// Iteration of each value and data processing/converting
 fn process_nodes(data: &Value) -> Vec<Node> {
     let mut processed_nodes: Vec<Node> = vec![];
     if let Value::Array(nodes_array) = data {

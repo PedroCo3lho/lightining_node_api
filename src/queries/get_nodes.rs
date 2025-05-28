@@ -22,15 +22,4 @@ pub async fn get_nodes(
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
     Ok(Json(res))
-    // println!("Displaying {} nodes", results.len());
-    // let mut new_nodes: Vec<Node> = vec![];
-    // for node in results {
-    //     new_nodes.push(Node {
-    //         public_key: node.public_key,
-    //         alias: node.alias,
-    //         capacity: node.capacity,
-    //         first_seen: node.first_seen,
-    //         updated_at: node.updated_at,
-    //     });
-    // }
 }
