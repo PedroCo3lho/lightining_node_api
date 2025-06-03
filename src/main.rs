@@ -5,11 +5,12 @@ use axum::{Router, routing::get};
 use diesel_async::{AsyncPgConnection, pooled_connection::AsyncDieselConnectionManager};
 use diesel_migrations::{EmbeddedMigrations, MigrationHarness, embed_migrations};
 use dotenvy::dotenv;
-use etl::fetch_api::fetch_nodes;
 use lightining_node_api::*;
-use queries::{add_nodes::add_node, get_nodes::get_nodes, update_nodes::update_node};
+use queries::{get_nodes::get_nodes, update_nodes::update_node};
 use std::{env, net::SocketAddr, time::Duration};
 use tokio::time::interval;
+// use etl::fetch_api::fetch_nodes;
+// use queries::add_nodes::add_node;
 
 pub type Pool = bb8::Pool<AsyncDieselConnectionManager<AsyncPgConnection>>;
 
@@ -41,7 +42,7 @@ async fn main() {
     }
 
     // Initial seeder 
-    seeder(&pool).await;
+    // seeder(&pool).await;
 
     // Routine that update nodes data
     tokio::spawn({
@@ -68,30 +69,30 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 
-async fn seeder(pool: &deadpool_diesel::Pool<deadpool_diesel::Manager<diesel::PgConnection>>) {
-    use axum::extract::State;
+// async fn seeder(pool: &deadpool_diesel::Pool<deadpool_diesel::Manager<diesel::PgConnection>>) {
+//     use axum::extract::State;
 
-    let state = State(pool.clone());
-    match get_nodes(state.clone()).await {
-        Ok(nodes) if !nodes.0.is_empty() => {
-            println!("Database already populated!");
-            return;
-        }
-        _ => {
-            println!("Populating database...");
-            let nodes = fetch_nodes().await;
-            for node in nodes {
-                let res = add_node(
-                    state.clone(),
-                    node.public_key,
-                    node.alias,
-                    node.capacity,
-                    node.first_seen,
-                    node.updated_at,
-                )
-                .await;
-                println!("{:?}", res);
-            }
-        }
-    }
-}
+//     let state = State(pool.clone());
+//     match get_nodes(state.clone()).await {
+//         Ok(nodes) if !nodes.0.is_empty() => {
+//             println!("Database already populated!");
+//             return;
+//         }
+//         _ => {
+//             println!("Populating database...");
+//             let nodes = fetch_nodes().await;
+//             for node in nodes {
+//                 let res = add_node(
+//                     state.clone(),
+//                     node.public_key,
+//                     node.alias,
+//                     node.capacity,
+//                     node.first_seen,
+//                     node.updated_at,
+//                 )
+//                 .await;
+//                 println!("{:?}", res);
+//             }
+//         }
+//     }
+// }
